@@ -1,0 +1,29 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<h1>My Profile</h1>
+<div class="fos_user_user_show">
+    <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Edit Profile</a>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">{{ 'profile.show.username'|trans }}</th>
+            <th scope="col">{{ 'profile.show.email'|trans }}</th>
+            <th scope="col">{{ 'profile.show.age'|trans }}</th>
+            <th scope="col">{{ 'profile.show.family'|trans }}</th>
+            <th scope="col">{{ 'profile.show.race'|trans }}</th>
+            <th scope="col">{{ 'profile.show.food'|trans }}</th>
+            <th scope="col">Friends</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">{{ user.username }}</th>
+            <td> {{ user.email }}</td>
+            <td> {{ user.age }}</td>
+            <td> {{ user.family }}</td>
+            <td> {{ user.race }}</td>
+            <td>{{ user.food }}</td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>

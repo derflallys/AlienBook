@@ -1,0 +1,9 @@
+registration:
+    flash:
+        user_created: 'Welcome to AlienBook , enjoy with your friends .'
+profile:
+  show:
+    age: 'Age'
+    family: 'Family'
+    race: 'Race'
+    food: 'Food'
