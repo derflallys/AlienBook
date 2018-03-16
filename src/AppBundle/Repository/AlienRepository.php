@@ -21,13 +21,11 @@ class AlienRepository extends  EntityRepository
     public function findFriends(Alien $alien)
     {
 
-
-      return  $this->createQueryBuilder('alien')
+        return  $this->createQueryBuilder('alien')
             ->leftJoin('alien.friends','friends')
-            ->andWhere('friends != :me')
-            ->setParameter('me',$alien)
-          ->andWhere('alien != :al')
-          ->setParameter('al',$alien)
+            ->andWhere('friends.id IS NULL OR friends.id<> :me')
+            ->setParameter('me',$alien->getId())
+            ->andWhere('alien.id != :me')
             ->getQuery()
             ->execute();
     }

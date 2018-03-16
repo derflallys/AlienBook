@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Alien;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 
@@ -11,6 +12,7 @@ class AlienController extends Controller
 {
     /**
      * @Route("/aliens",name="aliens_show")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function showAllAlienAction()
     {
@@ -32,6 +34,7 @@ class AlienController extends Controller
 
     /**
      * @Route("/addfriend/{id}", name="add_friend")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function addFriendAction($id)
     {
@@ -60,6 +63,7 @@ class AlienController extends Controller
 
     /**
      * @Route("/listfriend/{id}",name="list_friend")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function listFriends($id)
     {
@@ -71,6 +75,7 @@ class AlienController extends Controller
 
     /**
      * @Route("/removefriend/{id}" , name="remove_friend")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function removeFriends($id)
     {

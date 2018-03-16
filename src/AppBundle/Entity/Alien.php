@@ -165,6 +165,7 @@ class Alien extends BaseUser
 
     public function removeFriend(Alien $friend)
     {
+
         if($this->getFriends()->contains($friend)) {
             $this->getFriends()->removeElement($friend);
             $friend->removeFriend($this);
