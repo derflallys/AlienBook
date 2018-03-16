@@ -9,6 +9,7 @@
             <th>Age</th>
             <th>Family</th>
             <th>Food</th>
+            <th>Race</th>
             <th></th>
         </tr>
         </thead>
@@ -27,6 +28,10 @@
                 <td>
                     {{ alien.food }}
                 </td>
+                <td>
+                    {{ alien.race }}
+                </td>
+
                 <td>
                     <a href="{{ path('add_friend', {'id': alien.id}) }}" class="btn btn-xs btn-success">Add Friend</a>
                 </td>

@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Alien;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
+
 
 class AlienController extends Controller
 {
@@ -15,9 +15,17 @@ class AlienController extends Controller
     public function showAllAlienAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        if(!$user)
+        {
+            $aliens  = $em->getRepository('AppBundle:Alien')
+                ->findAll();
+        }
+        else{
+            $aliens  = $em->getRepository('AppBundle:Alien')
+                ->findFriends($user);
+        }
 
-        $aliens  = $em->getRepository('AppBundle:Alien')
-            ->findAll();
 
         return $this->render('alien/showAll.html.twig', array('aliens' => $aliens));
     }

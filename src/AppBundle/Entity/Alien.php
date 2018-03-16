@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Alien
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\AlienRepository")
  * @ORM\Table(name="fos_user")
  */
 class Alien extends BaseUser
