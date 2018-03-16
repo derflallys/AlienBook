@@ -51,9 +51,9 @@ class Alien extends BaseUser
     /**
      * @var ArrayCollection
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Alien")
-     * @ORM\JoinTable(
-     *     joinColumns={@ORM\JoinColumn(onDelete="CASCADE")},
-     *     inverseJoinColumns={@ORM\JoinColumn(onDelete="CASCADE")}
+     * @ORM\JoinTable(name="alien_friends",
+     *     joinColumns={@ORM\JoinColumn(name="alien_id",referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="friend_id",referencedColumnName="id")}
      * )
      */
     private $friends ;
@@ -151,11 +151,25 @@ class Alien extends BaseUser
 
 
     /**
-     * @param array $friends
+     * @param Alien $friend
      */
-    public function setFriends($friends)
+    public function addFriends(Alien $friend)
     {
-        $this->friends = $friends;
+        if(!$this->getFriends()->contains($friend))
+        {
+            $this->friends [] = $friend;
+            $friend->addFriends($this);
+        }
+
+    }
+
+    public function removeFriend(Alien $friend)
+    {
+        if($this->getFriends()->contains($friend)) {
+            $this->getFriends()->removeElement($friend);
+            $friend->removeFriend($this);
+        }
+
     }
 
 

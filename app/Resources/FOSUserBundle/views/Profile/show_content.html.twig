@@ -22,6 +22,9 @@
             <td> {{ user.family }}</td>
             <td> {{ user.race }}</td>
             <td>{{ user.food }}</td>
+            <td>
+                <a href="{{ path('list_friend', {'id': user.id}) }}" class="btn btn-xs btn-success">My Friends</a>
+            </td>
 
         </tr>
         </tbody>

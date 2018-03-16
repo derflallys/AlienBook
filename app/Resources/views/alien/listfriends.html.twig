@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Your Friends on AlienBook </h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Age</th>
+            <th>Family</th>
+            <th>Food</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for friend in friends %}
+            <tr>
+                <td>
+                    {{ friend.username }}
+                </td>
+                <td>
+                    {{ friend.age }}
+                </td>
+                <td>
+                    {{ friend.family }}
+                </td>
+                <td>
+                    {{ friend.food }}
+                </td>
+                <td>
+                    <a href="{{ path('remove_friend', {'id': friend.id}) }}" class="btn btn-xs btn-success">Remove Friend</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
