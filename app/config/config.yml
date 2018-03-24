@@ -7,6 +7,8 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    jms_serializer.camel_case_naming_strategy.class: JMS\Serializer\Naming\IdenticalPropertyNamingStrategy
+
 
 framework:
     #esi: ~
@@ -83,3 +85,28 @@ fos_user:
     profile:
         form:
             type: AppBundle\Form\ProfileFormType
+
+
+nelmio_cors:
+        defaults:
+            allow_credentials: false
+            allow_origin: []
+            allow_headers: []
+            allow_methods: []
+            expose_headers: []
+            max_age: 0
+            hosts: []
+            origin_regex: false
+        paths:
+            '^/api':
+                allow_origin: ['*']
+                allow_headers: ['*']
+                allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
+                max_age: 3600
+
+
+lexik_jwt_authentication:
+    private_key_path: '%kernel.root_dir%/../config/jwt/private.pem'
+    public_key_path:  '%kernel.root_dir%/../config/jwt/public.pem'
+    pass_phrase:      '%jwt_key_pass_phrase%'
+    token_ttl:        3600

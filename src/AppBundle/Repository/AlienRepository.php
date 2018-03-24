@@ -29,4 +29,19 @@ class AlienRepository extends  EntityRepository
             ->getQuery()
             ->execute();
     }
+
+    public function findSearch($filter = '')
+    {
+
+        $qb =  $this->createQueryBuilder('alien');
+
+        if($filter)
+        {
+            $qb->andWhere('alien.username LIKE :filter ')
+                ->setParameter('filter','%'.$filter.'%');
+        }
+
+        return $qb->getQuery()
+            ->execute();
+    }
 }

@@ -12,6 +12,15 @@ security:
                     id: fos_user.user_provider.username
 
     firewalls:
+        api:
+            pattern: ^/api/
+            anonymous: true
+            stateless: true
+            guard:
+                authenticator:
+                    - jwt_token_authenticator
+
+
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -26,6 +35,8 @@ security:
             anonymous:    true
             remember_me:
                 secret: '%secret%'
+
+
 
     access_control:
             - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
