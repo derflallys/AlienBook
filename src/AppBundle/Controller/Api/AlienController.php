@@ -5,6 +5,7 @@ namespace AppBundle\Controller\Api;
 use AppBundle\Api\ApiProblem;
 use AppBundle\Api\ApiProblemException;
 use AppBundle\Entity\Alien;
+use AppBundle\Form\UpdateAlienType;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use AppBundle\Form\RegistrationFormType;
@@ -56,7 +57,7 @@ class AlienController extends BaseController
 
         $qb = $this->getDoctrine()
             ->getRepository('AppBundle:Alien')
-            ->findAll();
+            ->findFriends($this->getUser());
 
         $response = $this->createApiResponse($qb);
         return $response;
@@ -163,6 +164,38 @@ class AlienController extends BaseController
         $em->persist($alien);
         $em->flush();
         return $this->getmyfriendAction();
+    }
+
+    /**
+     * @Route("api/edit",name="api_edit_profile")
+     * @Method({"PUT","PATCH"})
+     */
+    public function editProfile(Request $request)
+    {
+        $data = json_decode($request->getContent(), true);
+        $request->request->replace($data);
+        /**
+         * @var Alien
+         */
+        $alien = $this->getUser();
+
+        $alien->setEmail($request->request->get('email'));
+        $alien->setUsername($request->request->get('username'));
+        $alien->setAge($request->request->get('age'));
+        $alien->setFamily($request->request->get('family'));
+        $alien->setRace($request->request->get('race'));
+        $alien->setFood($request->request->get('food'));
+        $alien->setPAssword($request->request->get('password'));
+
+
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($alien);
+        $em->flush();
+        $response = $this->createApiResponse($alien);
+
+
+        return $response;
     }
 
 

@@ -76,7 +76,7 @@ class BaseController extends Controller
             ->serialize($data,'json',$context);
     }
 
-    private function processForm(Request $request,FormInterface $formInteface)
+    protected function processForm(Request $request,FormInterface $formInteface)
     {
         $body = $request->getContent();
         $data = json_decode($body,true);
@@ -93,7 +93,7 @@ class BaseController extends Controller
         $formInteface->submit($data,$clearMissing);
     }
 
-    private function throwApiProblemValidationException(FormInterface $form)
+    protected function throwApiProblemValidationException(FormInterface $form)
     {
         $errors = $this->getErrorsFromForm($form);
 
@@ -104,7 +104,7 @@ class BaseController extends Controller
         throw new ApiProblemException($apiProblem);
     }
 
-    private function getErrorsFromForm(FormInterface $form)
+    protected function getErrorsFromForm(FormInterface $form)
     {
         $errors = array();
         foreach ($form->getErrors() as $error) {
